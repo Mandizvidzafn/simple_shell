@@ -1,46 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/wait.h>
 
-int main(void)
-{
-    char *buffer = NULL;
-    size_t bufsize = 0;
+#define MAX_COMMAND_LENGTH 100
 
-    while (1)
-    {
+int main() {
+    char command[MAX_COMMAND_LENGTH];
+
+    while (1) {
         printf("#cisfun$ ");
-        if (getline(&buffer, &bufsize, stdin) == -1)
-        {
+        fflush(stdout);
+
+        // Read in the command from the user
+        if (fgets(command, MAX_COMMAND_LENGTH, stdin) == NULL) {
+            // Handle the end of file condition (Ctrl+D)
             printf("\n");
-            break;
+            exit(0);
         }
 
-        char *command = strtok(buffer, " \n");
-        if (command == NULL)
-            continue;
+        // Remove the trailing newline character from the command
+        command[strcspn(command, "\n")] = '\0';
 
+        // Fork a new process to execute the command
         pid_t pid = fork();
-        if (pid == -1)
-        {
-            perror("Error");
-            continue;
-        }
-        else if (pid == 0)
-        {
-            execve(command, &command, NULL);
-            perror("Error");
-            exit(EXIT_FAILURE);
-        }
-        else
-        {
+
+        if (pid < 0) {
+            // Handle the fork error
+            perror("fork");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            if (execlp(command, command, (char *) NULL) < 0) {
+                // Handle the error if the command doesn't exist
+                printf("%s: command not found\n", command);
+                exit(1);
+            }
+        } else {
+            // Parent process
             wait(NULL);
         }
     }
 
-    free(buffer);
-    return (0);
+    return 0;
 }
 
