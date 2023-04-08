@@ -9,12 +9,12 @@ Syscall
  An auto review will be launched at the deadline
 In a nutshell…
 Contribution: 100.0%
-Auto QA review: 0.0/55 mandatory & 0.0/76 optional
-Altogether:  0.0%
-Mandatory: 0.0%
-Optional: 0.0%
+Auto QA review: 16.0/55 mandatory & 3.5/76 optional
+Altogether:  30.43%
+Mandatory: 29.09%
+Optional: 4.61%
 Contribution: 100.0%
-Calculation:  100.0% * (0.0% + (0.0% * 0.0%) )  == 0.0%
+Calculation:  100.0% * (29.09% + (29.09% * 4.61%) )  == 30.43%
 Concepts
 For this project, we expect you to look at these concepts:
 
@@ -159,16 +159,16 @@ The Checker will be released at the end of the project (1-2 days before the dead
 Tasks
 0. Betty would be proud
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 50.0% (Checks completed: 100.0%)
 Write a beautiful code that passes the Betty checks
 
 Repo:
 
 GitHub repository: simple_shell
-     
+    
 1. Simple shell 0.1
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 42.86% (Checks completed: 85.71%)
 Write a UNIX command line interpreter.
 
 Usage: simple_shell
@@ -215,17 +215,17 @@ GitHub repository: simple_shell
      
 2. Simple shell 0.2
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 50.0% (Checks completed: 100.0%)
 Simple shell 0.1 +
 
 Handle command lines with arguments
 Repo:
 
 GitHub repository: simple_shell
-     
+    
 3. Simple shell 0.3
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 15.0% (Checks completed: 30.0%)
 Simple shell 0.2 +
 
 Handle the PATH
@@ -252,7 +252,7 @@ GitHub repository: simple_shell
      
 4. Simple shell 0.4
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 25.0% (Checks completed: 50.0%)
 Simple shell 0.3 +
 
 Implement the exit built-in, that exits the shell
@@ -264,7 +264,7 @@ GitHub repository: simple_shell
      
 5. Simple shell 1.0
 mandatory
-Score: 0.0% (Checks completed: 0.0%)
+Score: 50.0% (Checks completed: 100.0%)
 Simple shell 0.4 +
 
 Implement the env built-in, that prints the current environment
@@ -284,6 +284,218 @@ PATH=/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/us
 DISPLAY=:0
 $ exit
 julien@ubuntu:~/shell$ 
+Repo:
+
+GitHub repository: simple_shell
+    
+6. Simple shell 0.1.1
+#advanced
+Score: 50.0% (Checks completed: 100.0%)
+Simple shell 0.1 +
+
+Write your own getline function
+Use a buffer to read many chars at once and call the least possible the read system call
+You will need to use static variables
+You are not allowed to use getline
+You don’t have to:
+
+be able to move the cursor
+Repo:
+
+GitHub repository: simple_shell
+    
+7. Simple shell 0.2.1
+#advanced
+Score: 50.0% (Checks completed: 100.0%)
+Simple shell 0.2 +
+
+You are not allowed to use strtok
+Repo:
+
+GitHub repository: simple_shell
+    
+8. Simple shell 0.4.1
+#advanced
+Score: 8.33% (Checks completed: 16.67%)
+Simple shell 0.4 +
+
+handle arguments for the built-in exit
+Usage: exit status, where status is an integer used to exit the shell
+julien@ubuntu:~/shell$ ./shell_0.4.1
+$ exit 98
+julien@ubuntu:~/shell$ echo $?
+98
+julien@ubuntu:~/shell$ 
+Repo:
+
+GitHub repository: simple_shell
+     
+9. setenv, unsetenv
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Implement the setenv and unsetenv builtin commands
+
+setenv
+Initialize a new environment variable, or modify an existing one
+Command syntax: setenv VARIABLE VALUE
+Should print something on stderr on failure
+unsetenv
+Remove an environment variable
+Command syntax: unsetenv VARIABLE
+Should print something on stderr on failure
+Repo:
+
+GitHub repository: simple_shell
+     
+10. cd
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Implement the builtin command cd:
+
+Changes the current directory of the process.
+Command syntax: cd [DIRECTORY]
+If no argument is given to cd the command must be interpreted like cd $HOME
+You have to handle the command cd -
+You have to update the environment variable PWD when you change directory
+man chdir, man getcwd
+
+Repo:
+
+GitHub repository: simple_shell
+     
+11. ;
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Handle the commands separator ;
+alex@~$ ls /var ; ls /var
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /hbtn ; ls /var
+ls: cannot access /hbtn: No such file or directory
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /var ; ls /hbtn
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+ls: cannot access /hbtn: No such file or directory
+alex@~$ ls /var ; ls /hbtn ; ls /var ; ls /var
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+ls: cannot access /hbtn: No such file or directory
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$
+Repo:
+
+GitHub repository: simple_shell
+     
+12. && and ||
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Handle the && and || shell logical operators
+alex@~$ ls /var && ls /var
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /hbtn && ls /var
+ls: cannot access /hbtn: No such file or directory
+alex@~$ ls /var && ls /var && ls /var && ls /hbtn
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+ls: cannot access /hbtn: No such file or directory
+alex@~$ ls /var && ls /var && ls /var && ls /hbtn && ls /hbtn
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+ls: cannot access /hbtn: No such file or directory
+alex@~$
+alex@~$ ls /var || ls /var
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /hbtn || ls /var
+ls: cannot access /hbtn: No such file or directory
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /hbtn || ls /hbtn || ls /hbtn || ls /var
+ls: cannot access /hbtn: No such file or directory
+ls: cannot access /hbtn: No such file or directory
+ls: cannot access /hbtn: No such file or directory
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$ ls /hbtn || ls /hbtn || ls /hbtn || ls /var || ls /var
+ls: cannot access /hbtn: No such file or directory
+ls: cannot access /hbtn: No such file or directory
+ls: cannot access /hbtn: No such file or directory
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  spool  tmp
+alex@~$
+Repo:
+
+GitHub repository: simple_shell
+     
+13. alias
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Implement the alias builtin command
+Usage: alias [name[='value'] ...]
+alias: Prints a list of all aliases, one per line, in the form name='value'
+alias name [name2 ...]: Prints the aliases name, name2, etc 1 per line, in the form name='value'
+alias name='value' [...]: Defines an alias for each name whose value is given. If name is already an alias, replaces its value with value
+Repo:
+
+GitHub repository: simple_shell
+     
+14. Variables
+#advanced
+Score: 0.0% (Checks completed: 0.0%)
+Simple shell 1.0 +
+
+Handle variables replacement
+Handle the $? variable
+Handle the $$ variable
+julien@ubuntu:~/shell$ ./hsh
+$ ls /var
+backups  cache  crash  lib  local  lock  log  mail  metrics  opt  run  snap  spool  tmp
+$ echo $?
+0
+$ echo $$
+5104
+$ echo $PATH
+/home/julien/bin:/home/julien/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+$ exit 
+julien@ubuntu:~/shell$ 
+Repo:
+
+GitHub repository: simple_shell
+     
+15. Comments
+#advanced
+Score: 10.0% (Checks completed: 20.0%)
+Simple shell 1.0 +
+
+Handle comments (#)
+julien@ubuntu:~/shell$ sh
+$ echo $$ # ls -la
+5114
+$ exit
+julien@ubuntu:~/shell$ 
+Repo:
+
+GitHub repository: simple_shell
+     
+16. File as input
+#advanced
+Score: 12.5% (Checks completed: 25.0%)
+Simple shell 1.0 +
+
+Usage: simple_shell [filename]
+Your shell can take a file as a command line argument
+The file contains all the commands that your shell should run before exiting
+The file should contain one command per line
+In this mode, the shell should not print a prompt and should not read from stdin
 Repo:
 
 GitHub repository: simple_shell
