@@ -26,4 +26,21 @@ int main(void)
         if (pid == -1)
         {
             perror("Error");
+            continue;
+        }
+        else if (pid == 0)
+        {
+            execve(command, &command, NULL);
+            perror("Error");
+            exit(EXIT_FAILURE);
+        }
+        else
+        {
+            wait(NULL);
+        }
+    }
+
+    free(buffer);
+    return (0);
+}
 
